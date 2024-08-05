@@ -1,0 +1,1923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Class: EntryService</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Class: EntryService</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>
+            <span class="ancestors"><a href="module-EntryService.html">EntryService</a>~</span>EntryService<span class="signature">()</span><span class="type-signature"></span></h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+
+    
+    <h4 class="name" id="EntryService"><span class="type-signature"></span>new EntryService<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Service class for managing entries</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_entryService.js.html">services/entryService.js</a>, <a href="services_entryService.js.html#line11">line 11</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="addOrUpdatePick"><span class="type-signature">(async) </span>addOrUpdatePick<span class="signature">(entryId, userId, team, week)</span><span class="type-signature"> &rarr; {Promise.&lt;Object>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Add or update a pick for an entry</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>entryId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The ID of the entry</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>userId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The ID of the user</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>team</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The team picked (e.g., &quot;Patriots&quot;, &quot;49ers&quot;)</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>week</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The week number (1-18)</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_entryService.js.html">services/entryService.js</a>, <a href="services_entryService.js.html#line141">line 141</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        <p>If entry is not found, user is not authorized, or pick is invalid</p>
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">ErrorResponse</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The updated or created pick</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;Object></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>try {  const pick = await entryService.addOrUpdatePick('entry789', 'user123', 'Patriots', 5);  console.log('Added/Updated pick:', pick);  // Output: Added/Updated pick: { _id: '...', entry: 'entry789', team: 'Patriots', week: 5, ... }} catch (error) {  console.error('Error adding/updating pick:', error.message);}</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="eliminateEntry"><span class="type-signature">(async) </span>eliminateEntry<span class="signature">(entryId, week)</span><span class="type-signature"> &rarr; {Promise.&lt;Object>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Eliminate an entry</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>entryId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The ID of the entry</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>week</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The week number when the entry was eliminated (1-18)</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_entryService.js.html">services/entryService.js</a>, <a href="services_entryService.js.html#line257">line 257</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        <p>If entry is not found</p>
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">ErrorResponse</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The updated entry</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;Object></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>try {  const eliminatedEntry = await entryService.eliminateEntry('entry789', 6);  console.log('Eliminated entry:', eliminatedEntry);  // Output: Eliminated entry: { _id: 'entry789', status: 'eliminated', eliminatedWeek: 6, ... }} catch (error) {  console.error('Error eliminating entry:', error.message);}</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getEntriesForPool"><span class="type-signature">(async) </span>getEntriesForPool<span class="signature">(poolId)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;Object>>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Get all entries for a specific pool</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>poolId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The ID of the pool</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_entryService.js.html">services/entryService.js</a>, <a href="services_entryService.js.html#line111">line 111</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        <p>If pool is not found</p>
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">ErrorResponse</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Array of entries for the pool with populated user and picks information</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;Array.&lt;Object>></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>try {  const poolEntries = await entryService.getEntriesForPool('pool456');  console.log('Pool entries:', poolEntries);  // Output: Pool entries: [{ _id: '...', user: { _id: '...', username: 'John' }, pool: 'pool456', picks: [ ... ], ... }]} catch (error) {  console.error('Error fetching pool entries:', error.message);}</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getEntry"><span class="type-signature">(async) </span>getEntry<span class="signature">(entryId, userId)</span><span class="type-signature"> &rarr; {Promise.&lt;Object>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Get a specific entry for a user</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>entryId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The ID of the entry</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>userId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The ID of the user</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_entryService.js.html">services/entryService.js</a>, <a href="services_entryService.js.html#line82">line 82</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        <p>If entry is not found or user is not authorized</p>
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">ErrorResponse</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The entry object with populated pool and picks information</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;Object></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>try {  const entry = await entryService.getEntry('entry789', 'user123');  console.log('Entry:', entry);  // Output: Entry: { _id: 'entry789', user: 'user123', pool: { ... }, picks: [ ... ], ... }} catch (error) {  console.error('Error fetching entry:', error.message);}</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getPickForWeek"><span class="type-signature">(async) </span>getPickForWeek<span class="signature">(entryId, week)</span><span class="type-signature"> &rarr; {Promise.&lt;(Object|null)>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Get a pick for a specific week</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>entryId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The ID of the entry</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>week</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The week number (1-18)</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_entryService.js.html">services/entryService.js</a>, <a href="services_entryService.js.html#line193">line 193</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        <p>If entry is not found</p>
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">ErrorResponse</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The pick object or null if not found</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;(Object|null)></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>try {  const pick = await entryService.getPickForWeek('entry789', 5);  console.log('Pick for week 5:', pick);  // Output: Pick for week 5: { _id: '...', entry: 'entry789', team: 'Patriots', week: 5, ... }} catch (error) {  console.error('Error fetching pick:', error.message);}</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getUserEntries"><span class="type-signature">(async) </span>getUserEntries<span class="signature">(userId)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;Object>>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Get all entries for a user</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>userId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The ID of the user</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_entryService.js.html">services/entryService.js</a>, <a href="services_entryService.js.html#line32">line 32</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        <p>If there's an error retrieving the entries</p>
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">ErrorResponse</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Array of user entries with populated pool information</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;Array.&lt;Object>></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>try {  const userEntries = await entryService.getUserEntries('user123');  console.log('User entries:', userEntries);  // Output: User entries: [{ _id: '...', user: 'user123', pool: { _id: '...', name: 'NFL Pool 2023', currentWeek: 5 }, ... }]} catch (error) {  console.error('Error fetching user entries:', error.message);}</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getUserEntriesForPool"><span class="type-signature">(async) </span>getUserEntriesForPool<span class="signature">(userId, poolId)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;Object>>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Get user entries for a specific pool</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>userId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The ID of the user</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>poolId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The ID of the pool</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_entryService.js.html">services/entryService.js</a>, <a href="services_entryService.js.html#line57">line 57</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        <p>If there's an error retrieving the entries</p>
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">ErrorResponse</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Array of user entries for the specified pool</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;Array.&lt;Object>></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>try {  const poolEntries = await entryService.getUserEntriesForPool('user123', 'pool456');  console.log('User entries for pool:', poolEntries);  // Output: User entries for pool: [{ _id: '...', user: 'user123', pool: 'pool456', ... }]} catch (error) {  console.error('Error fetching user entries for pool:', error.message);}</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getUserEntriesWithPicks"><span class="type-signature">(async) </span>getUserEntriesWithPicks<span class="signature">(userId, populate<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;Object>>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Get user entries with picks</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>userId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>The ID of the user</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>populate</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Population option ('picks.game' to populate game information)</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_entryService.js.html">services/entryService.js</a>, <a href="services_entryService.js.html#line220">line 220</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        <p>If there's an error retrieving the entries</p>
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">ErrorResponse</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Array of user entries with populated picks and optional game information</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;Array.&lt;Object>></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>try {  const entriesWithPicks = await entryService.getUserEntriesWithPicks('user123', 'picks.game');  console.log('User entries with picks:', entriesWithPicks);  // Output: User entries with picks: [{ _id: '...', user: 'user123', pool: { ... }, picks: [{ game: { ... }, team: 'Patriots', week: 5 }, ...] }, ...]} catch (error) {  console.error('Error fetching user entries with picks:', error.message);}</code></pre>
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-AdvancedResultsMiddleware.html">AdvancedResultsMiddleware</a></li><li><a href="module-AsyncMiddleware.html">AsyncMiddleware</a></li><li><a href="module-AuthMiddleware.html">AuthMiddleware</a></li><li><a href="module-BaseService.html">BaseService</a></li><li><a href="module-Blacklist.html">Blacklist</a></li><li><a href="module-CheckGameStartMiddleware.html">CheckGameStartMiddleware</a></li><li><a href="module-CheckPickDeadlineMiddleware.html">CheckPickDeadlineMiddleware</a></li><li><a href="module-Entry.html">Entry</a></li><li><a href="module-EntryService.html">EntryService</a></li><li><a href="module-ErrorMiddleware.html">ErrorMiddleware</a></li><li><a href="module-Game.html">Game</a></li><li><a href="module-GameService.html">GameService</a></li><li><a href="module-Pick.html">Pick</a></li><li><a href="module-PickService.html">PickService</a></li><li><a href="module-Pool.html">Pool</a></li><li><a href="module-PoolService.html">PoolService</a></li><li><a href="module-Request.html">Request</a></li><li><a href="module-RequestService.html">RequestService</a></li><li><a href="module-RundownApiService.html">RundownApiService</a></li><li><a href="module-SeasonService.html">SeasonService</a></li><li><a href="module-User.html">User</a></li><li><a href="module-UserPoolStats.html">UserPoolStats</a></li><li><a href="module-ValidatorMiddleware.html">ValidatorMiddleware</a></li><li><a href="module-errorResponse.html">errorResponse</a></li><li><a href="module-logger.html">logger</a></li><li><a href="module-nflWeekCalculator.html">nflWeekCalculator</a></li><li><a href="module-testLogger.html">testLogger</a></li><li><a href="module-testUtils.html">testUtils</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-RundownApiService-rundownApi.html">rundownApi</a></li></ul><h3>Classes</h3><ul><li><a href="module-BaseService-BaseService.html">BaseService</a></li><li><a href="module-EntryService-EntryService.html">EntryService</a></li><li><a href="module-Entry.html#~Entry">Entry</a></li><li><a href="module-GameService-GameService.html">GameService</a></li><li><a href="module-PickService-PickService.html">PickService</a></li><li><a href="module-Pick.html#~Pick">Pick</a></li><li><a href="module-PoolService-PoolService.html">PoolService</a></li><li><a href="module-Pool.html#~Pool">Pool</a></li><li><a href="module-RequestService-RequestService.html">RequestService</a></li><li><a href="module-Request.html#~Request">Request</a></li><li><a href="module-User.html#~User">User</a></li><li><a href="module-errorResponse-ErrorResponse.html">ErrorResponse</a></li></ul><h3>Global</h3><ul><li><a href="global.html#sendEmail">sendEmail</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Mon Aug 05 2024 11:47:53 GMT-0700 (Pacific Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

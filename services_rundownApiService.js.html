@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: services/rundownApiService.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: services/rundownApiService.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @module RundownApiService
+ */
+
+const axios = require('axios');
+const config = require('../config/rundownApi');
+
+/**
+ * Format a date to ISO 8601 string
+ * @param {Date|string} date - The date to format
+ * @returns {string} The formatted date string
+ */
+const formatDateISO8601 = (date) => {
+  if (typeof date === 'string') {
+    // If it's already a string, assume it's in the correct format
+    return date;
+  }
+  return date.toISOString();
+};
+
+/**
+ * Axios instance for Rundown API
+ * @type {AxiosInstance}
+ */
+const api = axios.create({
+  baseURL: config.BASE_URL,
+  headers: {
+    'x-rapidapi-key': config.RAPID_API_KEY,
+    'x-rapidapi-host': config.RAPID_API_HOST
+  }
+});
+
+/**
+ * Rundown API service
+ * @namespace
+ */
+const rundownApi = {
+  config: {
+    ...config,
+    SPORT_ID: {
+      NFL: 2
+    },
+    AFFILIATE_ID: 3 // Assuming 3 is the affiliate we want
+  },
+
+  /**
+   * Fetch NFL schedule
+   * @async
+   * @param {Date|string} fromDate - The start date for the schedule
+   * @param {number} [limit=400] - The maximum number of results to return
+   * @returns {Promise&lt;Array>} Array of NFL schedule data
+   * @throws {Error} If there's an error fetching the schedule
+   */
+  fetchNFLSchedule: async (fromDate, limit = 400) => {
+    try {
+      const url = `/sports/${rundownApi.config.SPORT_ID.NFL}/schedule`;
+      const response = await api.get(url, {
+        params: { 
+          from: formatDateISO8601(fromDate),
+          limit: limit
+        }
+      });
+      
+      return response.data.schedules;
+    } catch (error) {
+      console.error('Error fetching NFL schedule:', error.message);
+      throw error;
+    }
+  },
+
+  /**
+   * Fetch details for a specific event
+   * @async
+   * @param {string} eventId - The ID of the event
+   * @returns {Promise&lt;Object|null>} The event details or null if not found
+   * @throws {Error} If there's an error fetching the event details
+   */
+  fetchEventDetails: async (eventId) => {
+    try {
+      const response = await api.get(`/events/${eventId}`, {
+        params: {
+          include: 'all_periods'
+        }
+      });
+
+      const eventData = response.data;
+      const affiliateLines = eventData.lines[rundownApi.config.AFFILIATE_ID];
+
+      if (!affiliateLines) {
+        console.warn(`No lines found for affiliate ${rundownApi.config.AFFILIATE_ID}`);
+        return null;
+      }
+
+      return {
+        event_id: eventData.event_id,
+        sport_id: eventData.sport_id,
+        event_date: eventData.event_date,
+        away_team: eventData.teams_normalized[0],
+        home_team: eventData.teams_normalized[1],
+        total: affiliateLines.total ? affiliateLines.total.total_over : null,
+        event_status: eventData.score.event_status,
+        score_away: eventData.score.score_away,
+        score_home: eventData.score.score_home,
+        broadcast: eventData.score.broadcast,
+        venue_name: eventData.score.venue_name,
+        venue_location: eventData.score.venue_location
+      };
+    } catch (error) {
+      console.error('Error fetching event details:', error.message);
+      throw error;
+    }
+  },
+
+  /**
+   * Fetch NFL events for a specific date
+   * @async
+   * @param {Date|string} date - The date to fetch events for
+   * @returns {Promise&lt;Array>} Array of NFL events
+   * @throws {Error} If there's an error fetching the events
+   */
+  fetchNFLEvents: async (date) => {
+    try {
+      const url = `/sports/${rundownApi.config.SPORT_ID.NFL}/events/${formatDateISO8601(date)}`;
+      const response = await api.get(url, {
+        params: {
+          include: 'all_periods'
+        }
+      });
+      
+      return response.data.events;
+    } catch (error) {
+      console.error('Error fetching NFL events:', error.message);
+      throw error;
+    }
+  }
+};
+
+module.exports = rundownApi;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-AdvancedResultsMiddleware.html">AdvancedResultsMiddleware</a></li><li><a href="module-AsyncMiddleware.html">AsyncMiddleware</a></li><li><a href="module-AuthMiddleware.html">AuthMiddleware</a></li><li><a href="module-BaseService.html">BaseService</a></li><li><a href="module-Blacklist.html">Blacklist</a></li><li><a href="module-CheckGameStartMiddleware.html">CheckGameStartMiddleware</a></li><li><a href="module-CheckPickDeadlineMiddleware.html">CheckPickDeadlineMiddleware</a></li><li><a href="module-Entry.html">Entry</a></li><li><a href="module-EntryService.html">EntryService</a></li><li><a href="module-ErrorMiddleware.html">ErrorMiddleware</a></li><li><a href="module-Game.html">Game</a></li><li><a href="module-GameService.html">GameService</a></li><li><a href="module-Pick.html">Pick</a></li><li><a href="module-PickService.html">PickService</a></li><li><a href="module-Pool.html">Pool</a></li><li><a href="module-PoolService.html">PoolService</a></li><li><a href="module-Request.html">Request</a></li><li><a href="module-RequestService.html">RequestService</a></li><li><a href="module-RundownApiService.html">RundownApiService</a></li><li><a href="module-SeasonService.html">SeasonService</a></li><li><a href="module-User.html">User</a></li><li><a href="module-UserPoolStats.html">UserPoolStats</a></li><li><a href="module-ValidatorMiddleware.html">ValidatorMiddleware</a></li><li><a href="module-errorResponse.html">errorResponse</a></li><li><a href="module-logger.html">logger</a></li><li><a href="module-nflWeekCalculator.html">nflWeekCalculator</a></li><li><a href="module-testLogger.html">testLogger</a></li><li><a href="module-testUtils.html">testUtils</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-RundownApiService-rundownApi.html">rundownApi</a></li></ul><h3>Classes</h3><ul><li><a href="module-BaseService-BaseService.html">BaseService</a></li><li><a href="module-EntryService-EntryService.html">EntryService</a></li><li><a href="module-Entry.html#~Entry">Entry</a></li><li><a href="module-GameService-GameService.html">GameService</a></li><li><a href="module-PickService-PickService.html">PickService</a></li><li><a href="module-Pick.html#~Pick">Pick</a></li><li><a href="module-PoolService-PoolService.html">PoolService</a></li><li><a href="module-Pool.html#~Pool">Pool</a></li><li><a href="module-RequestService-RequestService.html">RequestService</a></li><li><a href="module-Request.html#~Request">Request</a></li><li><a href="module-User.html#~User">User</a></li><li><a href="module-errorResponse-ErrorResponse.html">ErrorResponse</a></li></ul><h3>Global</h3><ul><li><a href="global.html#sendEmail">sendEmail</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Mon Aug 05 2024 11:47:53 GMT-0700 (Pacific Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

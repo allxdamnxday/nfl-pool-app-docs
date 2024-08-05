@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Namespace: rundownApi</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Namespace: rundownApi</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>
+            <span class="ancestors"><a href="module-RundownApiService.html">RundownApiService</a>~</span>rundownApi</h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description"><p>Rundown API service</p></div>
+        
+
+        
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_rundownApiService.js.html">services/rundownApiService.js</a>, <a href="services_rundownApiService.js.html#line37">line 37</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".fetchEventDetails"><span class="type-signature">(async, static) </span>fetchEventDetails<span class="signature">(eventId)</span><span class="type-signature"> &rarr; {Promise.&lt;(Object|null)>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Fetch details for a specific event</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>eventId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The ID of the event</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_rundownApiService.js.html">services/rundownApiService.js</a>, <a href="services_rundownApiService.js.html#line78">line 78</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        <p>If there's an error fetching the event details</p>
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">Error</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The event details or null if not found</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;(Object|null)></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".fetchNFLEvents"><span class="type-signature">(async, static) </span>fetchNFLEvents<span class="signature">(date)</span><span class="type-signature"> &rarr; {Promise.&lt;Array>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Fetch NFL events for a specific date</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>date</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Date</span>
+|
+
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The date to fetch events for</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_rundownApiService.js.html">services/rundownApiService.js</a>, <a href="services_rundownApiService.js.html#line121">line 121</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        <p>If there's an error fetching the events</p>
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">Error</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Array of NFL events</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;Array></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".fetchNFLSchedule"><span class="type-signature">(async, static) </span>fetchNFLSchedule<span class="signature">(fromDate, limit<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;Array>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Fetch NFL schedule</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>fromDate</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Date</span>
+|
+
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>The start date for the schedule</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>limit</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    400
+                
+                </td>
+            
+
+            <td class="description last"><p>The maximum number of results to return</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_rundownApiService.js.html">services/rundownApiService.js</a>, <a href="services_rundownApiService.js.html#line54">line 54</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        <p>If there's an error fetching the schedule</p>
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">Error</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Array of NFL schedule data</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;Array></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-AdvancedResultsMiddleware.html">AdvancedResultsMiddleware</a></li><li><a href="module-AsyncMiddleware.html">AsyncMiddleware</a></li><li><a href="module-AuthMiddleware.html">AuthMiddleware</a></li><li><a href="module-BaseService.html">BaseService</a></li><li><a href="module-Blacklist.html">Blacklist</a></li><li><a href="module-CheckGameStartMiddleware.html">CheckGameStartMiddleware</a></li><li><a href="module-CheckPickDeadlineMiddleware.html">CheckPickDeadlineMiddleware</a></li><li><a href="module-Entry.html">Entry</a></li><li><a href="module-EntryService.html">EntryService</a></li><li><a href="module-ErrorMiddleware.html">ErrorMiddleware</a></li><li><a href="module-Game.html">Game</a></li><li><a href="module-GameService.html">GameService</a></li><li><a href="module-Pick.html">Pick</a></li><li><a href="module-PickService.html">PickService</a></li><li><a href="module-Pool.html">Pool</a></li><li><a href="module-PoolService.html">PoolService</a></li><li><a href="module-Request.html">Request</a></li><li><a href="module-RequestService.html">RequestService</a></li><li><a href="module-RundownApiService.html">RundownApiService</a></li><li><a href="module-SeasonService.html">SeasonService</a></li><li><a href="module-User.html">User</a></li><li><a href="module-UserPoolStats.html">UserPoolStats</a></li><li><a href="module-ValidatorMiddleware.html">ValidatorMiddleware</a></li><li><a href="module-errorResponse.html">errorResponse</a></li><li><a href="module-logger.html">logger</a></li><li><a href="module-nflWeekCalculator.html">nflWeekCalculator</a></li><li><a href="module-testLogger.html">testLogger</a></li><li><a href="module-testUtils.html">testUtils</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-RundownApiService-rundownApi.html">rundownApi</a></li></ul><h3>Classes</h3><ul><li><a href="module-BaseService-BaseService.html">BaseService</a></li><li><a href="module-EntryService-EntryService.html">EntryService</a></li><li><a href="module-Entry.html#~Entry">Entry</a></li><li><a href="module-GameService-GameService.html">GameService</a></li><li><a href="module-PickService-PickService.html">PickService</a></li><li><a href="module-Pick.html#~Pick">Pick</a></li><li><a href="module-PoolService-PoolService.html">PoolService</a></li><li><a href="module-Pool.html#~Pool">Pool</a></li><li><a href="module-RequestService-RequestService.html">RequestService</a></li><li><a href="module-Request.html#~Request">Request</a></li><li><a href="module-User.html#~User">User</a></li><li><a href="module-errorResponse-ErrorResponse.html">ErrorResponse</a></li></ul><h3>Global</h3><ul><li><a href="global.html#sendEmail">sendEmail</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Mon Aug 05 2024 11:47:53 GMT-0700 (Pacific Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

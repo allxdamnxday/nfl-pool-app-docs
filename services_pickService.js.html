@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: services/pickService.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: services/pickService.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @module PickService
+ * @description Service module for managing user picks in the NFL pool application. This service handles the creation, retrieval, updating, and deletion of picks for pool entries.
+ */
+
+const Pick = require('../models/Pick');
+const Entry = require('../models/Entry');
+const Game = require('../models/Game');
+const ErrorResponse = require('../utils/errorResponse');
+const logger = require('../utils/logger');
+
+/**
+ * Service class for managing picks
+ * @class PickService
+ */
+class PickService {
+  /**
+   * Add or update a pick for an entry
+   * @async
+   * @param {string} entryId - The ID of the entry
+   * @param {number} entryNumber - The entry number (1, 2, or 3)
+   * @param {string} userId - The ID of the user making the pick
+   * @param {string} team - The team picked (e.g., "Patriots", "49ers")
+   * @param {number} week - The NFL week number (1-18)
+   * @returns {Promise&lt;Object>} The created or updated pick object
+   * @throws {ErrorResponse} If entry is not found, user is not authorized, pick is invalid, or game has already started
+   * 
+   * @example
+   * try {
+   *   const pick = await pickService.addOrUpdatePick('entry123', 1, 'user456', 'Patriots', 5);
+   *   console.log('Pick added/updated:', pick);
+   *   // Output: Pick added/updated: { _id: '...', entry: 'entry123', entryNumber: 1, team: 'Patriots', week: 5 }
+   * } catch (error) {
+   *   console.error('Error adding/updating pick:', error.message);
+   * }
+   */
+  async addOrUpdatePick(entryId, entryNumber, userId, team, week) {
+    logger.info(`Attempting to add/update pick for entry ${entryId}, user ${userId}, team ${team}, week ${week}`);
+    
+    const entry = await Entry.findById(entryId).populate('pool');
+    if (!entry) {
+      logger.error(`No entry found with id ${entryId}`);
+      throw new ErrorResponse(`No entry found with id ${entryId}`, 404);
+    }
+
+    if (entry.user.toString() !== userId) {
+      logger.warn(`User ${userId} attempted to update entry ${entryId} without authorization`);
+      throw new ErrorResponse(`User ${userId} is not authorized to update this entry`, 403);
+    }
+
+    if (week &lt; 1 || week > entry.pool.numberOfWeeks) {
+      logger.warn(`Invalid week number ${week} for entry ${entryId}`);
+      throw new ErrorResponse(`Invalid week number`, 400);
+    }
+
+    const teamAlreadyPicked = await Pick.findOne({
+      entry: entryId,
+      team: team,
+      week: { $ne: parseInt(week) }
+    });
+
+    if (teamAlreadyPicked) {
+      logger.warn(`User attempted to pick ${team} again for entry ${entryId}`);
+      throw new ErrorResponse(`You already have a ${team} pick this season for this entry, please choose another team`, 400);
+    }
+
+    const game = await Game.findOne({ week, $or: [{ homeTeam: team }, { awayTeam: team }] });
+    if (!game) {
+      logger.error(`No game found for team ${team} in week ${week}`);
+      throw new ErrorResponse(`No game found for team ${team} in week ${week}`, 404);
+    }
+
+    if (new Date() >= game.startTime) {
+      logger.warn(`Attempted to update pick after game start for entry ${entryId}, week ${week}`);
+      throw new ErrorResponse(`Cannot update pick after game has started`, 400);
+    }
+
+    const pick = await Pick.findOneAndUpdate(
+      { entry: entryId, entryNumber, week: parseInt(week) },
+      { team: team },
+      { upsert: true, new: true }
+    );
+
+    logger.info(`Successfully added/updated pick for entry ${entryId}, week ${week}`);
+    return pick;
+  }
+
+  /**
+   * Get picks for a specific week
+   * @async
+   * @param {string} entryId - The ID of the entry
+   * @param {number} entryNumber - The entry number (1, 2, or 3)
+   * @param {number} week - The NFL week number (1-18)
+   * @returns {Promise&lt;Array&lt;Object>>} Array of pick objects for the specified week
+   * @throws {ErrorResponse} If there's an error retrieving the picks
+   * 
+   * @example
+   * try {
+   *   const weekPicks = await pickService.getPicksForWeek('entry123', 1, 5);
+   *   console.log('Picks for week 5:', weekPicks);
+   *   // Output: Picks for week 5: [{ _id: '...', entry: 'entry123', entryNumber: 1, team: 'Patriots', week: 5 }]
+   * } catch (error) {
+   *   console.error('Error fetching picks for week:', error.message);
+   * }
+   */
+  async getPicksForWeek(entryId, entryNumber, week) {
+    logger.info(`Fetching picks for entry ${entryId}, number ${entryNumber}, week ${week}`);
+    try {
+      const picks = await Pick.find({ entry: entryId, entryNumber, week: parseInt(week) });
+      return picks;
+    } catch (error) {
+      logger.error(`Error fetching picks for entry ${entryId}, week ${week}: ${error.message}`);
+      throw new ErrorResponse(`Error fetching picks: ${error.message}`, 500);
+    }
+  }
+
+  /**
+   * Get all picks for an entry
+   * @async
+   * @param {string} entryId - The ID of the entry
+   * @returns {Promise&lt;Array&lt;Object>>} Array of all pick objects for the entry
+   * @throws {ErrorResponse} If there's an error retrieving the picks
+   * 
+   * @example
+   * try {
+   *   const allPicks = await pickService.getPicksForEntry('entry123');
+   *   console.log('All picks for entry:', allPicks);
+   *   // Output: All picks for entry: [{ _id: '...', entry: 'entry123', entryNumber: 1, team: 'Patriots', week: 5 }, ...]
+   * } catch (error) {
+   *   console.error('Error fetching all picks for entry:', error.message);
+   * }
+   */
+  async getPicksForEntry(entryId) {
+    logger.info(`Fetching all picks for entry ${entryId}`);
+    try {
+      const picks = await Pick.find({ entry: entryId });
+      return picks;
+    } catch (error) {
+      logger.error(`Error fetching all picks for entry ${entryId}: ${error.message}`);
+      throw new ErrorResponse(`Error fetching picks: ${error.message}`, 500);
+    }
+  }
+
+  /**
+   * Update a pick
+   * @async
+   * @param {string} entryId - The ID of the entry
+   * @param {number} entryNumber - The entry number (1, 2, or 3)
+   * @param {number} week - The NFL week number (1-18)
+   * @param {string} userId - The ID of the user making the update
+   * @param {Object} updateData - The data to update the pick with
+   * @param {string} [updateData.team] - The new team to pick
+   * @param {string} [updateData.result] - The result of the pick ('win', 'loss', or 'pending')
+   * @returns {Promise&lt;Object>} The updated pick object
+   * @throws {ErrorResponse} If entry is not found, user is not authorized, or pick is not found
+   * 
+   * @example
+   * try {
+   *   const updatedPick = await pickService.updatePick('entry123', 1, 5, 'user456', { team: '49ers' });
+   *   console.log('Updated pick:', updatedPick);
+   *   // Output: Updated pick: { _id: '...', entry: 'entry123', entryNumber: 1, team: '49ers', week: 5 }
+   * } catch (error) {
+   *   console.error('Error updating pick:', error.message);
+   * }
+   */
+  async updatePick(entryId, entryNumber, week, userId, updateData) {
+    logger.info(`Attempting to update pick for entry ${entryId}, user ${userId}, week ${week}`);
+    
+    const entry = await Entry.findById(entryId);
+    if (!entry) {
+      logger.error(`No entry found with id ${entryId}`);
+      throw new ErrorResponse(`No entry with the id of ${entryId}`, 404);
+    }
+
+    if (entry.user.toString() !== userId) {
+      logger.warn(`User ${userId} attempted to update pick for entry ${entryId} without authorization`);
+      throw new ErrorResponse(`User not authorized to update this pick`, 401);
+    }
+
+    const pick = await Pick.findOneAndUpdate(
+      { entry: entryId, entryNumber, week: parseInt(week) },
+      updateData,
+      { new: true, runValidators: true }
+    );
+
+    if (!pick) {
+      logger.error(`No pick found for entry ${entryId}, number ${entryNumber}, week ${week}`);
+      throw new ErrorResponse(`No pick found for entry ${entryId}, number ${entryNumber}, week ${week}`, 404);
+    }
+
+    logger.info(`Successfully updated pick for entry ${entryId}, week ${week}`);
+    return pick;
+  }
+
+  /**
+   * Delete a pick
+   * @async
+   * @param {string} entryId - The ID of the entry
+   * @param {number} entryNumber - The entry number (1, 2, or 3)
+   * @param {number} week - The NFL week number (1-18)
+   * @param {string} userId - The ID of the user requesting the deletion
+   * @throws {ErrorResponse} If entry is not found, user is not authorized, or pick is not found
+   * 
+   * @example
+   * try {
+   *   await pickService.deletePick('entry123', 1, 5, 'user456');
+   *   console.log('Pick deleted successfully');
+   * } catch (error) {
+   *   console.error('Error deleting pick:', error.message);
+   * }
+   */
+  async deletePick(entryId, entryNumber, week, userId) {
+    logger.info(`Attempting to delete pick for entry ${entryId}, user ${userId}, week ${week}`);
+    
+    const entry = await Entry.findById(entryId);
+    if (!entry) {
+      logger.error(`No entry found with id ${entryId}`);
+      throw new ErrorResponse(`No entry with the id of ${entryId}`, 404);
+    }
+
+    if (entry.user.toString() !== userId) {
+      logger.warn(`User ${userId} attempted to delete pick for entry ${entryId} without authorization`);
+      throw new ErrorResponse(`User not authorized to delete this pick`, 401);
+    }
+
+    const pick = await Pick.findOneAndDelete({ entry: entryId, entryNumber, week: parseInt(week) });
+    if (!pick) {
+      logger.error(`No pick found for entry ${entryId}, number ${entryNumber}, week ${week}`);
+      throw new ErrorResponse(`No pick found for entry ${entryId}, number ${entryNumber}, week ${week}`, 404);
+    }
+
+    logger.info(`Successfully deleted pick for entry ${entryId}, week ${week}`);
+  }
+}
+
+module.exports = new PickService();</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-AdvancedResultsMiddleware.html">AdvancedResultsMiddleware</a></li><li><a href="module-AsyncMiddleware.html">AsyncMiddleware</a></li><li><a href="module-AuthMiddleware.html">AuthMiddleware</a></li><li><a href="module-BaseService.html">BaseService</a></li><li><a href="module-Blacklist.html">Blacklist</a></li><li><a href="module-CheckGameStartMiddleware.html">CheckGameStartMiddleware</a></li><li><a href="module-CheckPickDeadlineMiddleware.html">CheckPickDeadlineMiddleware</a></li><li><a href="module-Entry.html">Entry</a></li><li><a href="module-EntryService.html">EntryService</a></li><li><a href="module-ErrorMiddleware.html">ErrorMiddleware</a></li><li><a href="module-Game.html">Game</a></li><li><a href="module-GameService.html">GameService</a></li><li><a href="module-Pick.html">Pick</a></li><li><a href="module-PickService.html">PickService</a></li><li><a href="module-Pool.html">Pool</a></li><li><a href="module-PoolService.html">PoolService</a></li><li><a href="module-Request.html">Request</a></li><li><a href="module-RequestService.html">RequestService</a></li><li><a href="module-RundownApiService.html">RundownApiService</a></li><li><a href="module-SeasonService.html">SeasonService</a></li><li><a href="module-User.html">User</a></li><li><a href="module-UserPoolStats.html">UserPoolStats</a></li><li><a href="module-ValidatorMiddleware.html">ValidatorMiddleware</a></li><li><a href="module-errorResponse.html">errorResponse</a></li><li><a href="module-logger.html">logger</a></li><li><a href="module-nflWeekCalculator.html">nflWeekCalculator</a></li><li><a href="module-testLogger.html">testLogger</a></li><li><a href="module-testUtils.html">testUtils</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-RundownApiService-rundownApi.html">rundownApi</a></li></ul><h3>Classes</h3><ul><li><a href="module-BaseService-BaseService.html">BaseService</a></li><li><a href="module-EntryService-EntryService.html">EntryService</a></li><li><a href="module-Entry.html#~Entry">Entry</a></li><li><a href="module-GameService-GameService.html">GameService</a></li><li><a href="module-PickService-PickService.html">PickService</a></li><li><a href="module-Pick.html#~Pick">Pick</a></li><li><a href="module-PoolService-PoolService.html">PoolService</a></li><li><a href="module-Pool.html#~Pool">Pool</a></li><li><a href="module-RequestService-RequestService.html">RequestService</a></li><li><a href="module-Request.html#~Request">Request</a></li><li><a href="module-User.html#~User">User</a></li><li><a href="module-errorResponse-ErrorResponse.html">ErrorResponse</a></li></ul><h3>Global</h3><ul><li><a href="global.html#sendEmail">sendEmail</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Mon Aug 05 2024 11:47:53 GMT-0700 (Pacific Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
